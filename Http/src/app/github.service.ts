@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+/*import { Http, Response, Headers, RequestOptions } from '@angular/http';*/
+import { HttpClient } from '@angular/common/http';
 import { Observable} from 'rxjs/Rx';
 
 import { repos} from './repos';
@@ -9,25 +10,28 @@ import 'rxjs/add/operator/catch';
 
 
 @Injectable()
-export class GitHubService {  
-   
+export class GitHubService {
+
    baseURL:string="https://api.github.com/";
 
-   constructor(private http:Http){
-   } 
+   constructor(private http:HttpClient){
+   }
 
    getRepos(userName:string): Observable<repos[]> {
+        return this.http.get<repos[]>(this.baseURL + 'users/' + userName + '/repos')
+   }
+
+   /*getRepos(userName:string): Observable<repos[]> {
         return this.http.get(this.baseURL+'users/'+userName+'/repos')
-                /*.map((response)=> <repos[]>response.json())  */
                 .map(this.extractRepos)
                 .catch(this.handleError)
    }
-    
+
 
    private extractRepos(res: Response) {
         return <repos[]>res.json();
    }
-  
+
    private handleError(error:Response|any){
 
         let errMsg: string;
@@ -40,9 +44,8 @@ export class GitHubService {
         }
         console.error(errMsg);
         return Observable.throw(errMsg);
-   } 
+   } */
 
 }
 
 
- /*.map(response => response.json());*/

@@ -1,0 +1,24 @@
+<div class="container">
+
+    <h1 class="heading"><strong>HTTP </strong>Demo</h1>
+    
+
+    <div class="form-group">
+       <label for="firstname">First Name</label>
+       <input type="text" class="form-control" name="userName" [(ngModel)]="userName">
+    </div>
+
+    <div class="form-group">
+        <button type="button" (click)="getRepos()">Get Repos</button>
+    </div>
+
+    <div *ngIf="loading">loading...</div>
+    
+    <pre>{{repos | json}}</pre>
+
+</div>
+
+
+
+
+

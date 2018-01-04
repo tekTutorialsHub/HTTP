@@ -14,23 +14,23 @@ import { repos} from './repos';
 export class AppComponent
 {
 
-    userName: string ="tektutorialshub"
+    userName = 'tektutorialshub';
     repos: repos[];
 
-    loading: boolean=false;
-    errorMessage;
+    loading = false;
+    errorMessage = '';
 
     constructor(private githubService: GitHubService) {
     }
 
     public getRepos() {
-        this.loading=true;
-        this.errorMessage="";
+        this.loading = true;
+        this.errorMessage = '';
         this.githubService.getRepos(this.userName)
-            .subscribe((response) => {this.repos=response;},
-                       (error) => {this.errorMessage=error; this.loading=false; },
-                        () => {this.loading=false;})
-            
+            .subscribe((response) => {this.repos = response;},
+                       (error) => {this.errorMessage = error; this.loading = false; },
+                        () => {this.loading = false;})
+
     }
 
 }

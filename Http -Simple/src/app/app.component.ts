@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+/*import { Http, Response, Headers, RequestOptions } from '@angular/http';*/
+import { HttpClient } from '@angular/common/http';
 import { Observable} from 'rxjs/Rx';
+import { error } from 'selenium-webdriver';
 
 
 @Component({
@@ -18,16 +20,36 @@ export class AppComponent
 
     repos: any[];
 
-    constructor(public http: Http) {
+    /*constructor(public http: Http) {
+    
+    }*/
+    constructor(public http: HttpClient) {
     
     }
-   public getRepos() {
+
+   /*public getRepos() {
         this.loading = true;
         this.http.request(this.baseUrl+'users/'+this.userName+'/repos')
                  .subscribe((res: Response) => {
                      this.repos = res.json();
                      this.loading = false;
                 });
+
+    }*/
+
+
+    public getRepos() {
+        this.loading = true;
+        this.http.get<any[]>(this.baseUrl+'users/'+this.userName+'/repos')
+                 .subscribe(data => {
+                     this.repos = data;
+                     this.loading = false;
+                },
+                error => {
+                    this.repos = error;
+                    this.loading = false;
+                }
+            );
 
     }
 
