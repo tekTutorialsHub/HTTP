@@ -15,6 +15,9 @@ export class AppComponent
 {
 
     userName = 'tektutorialshub';
+    pageNo  = '1';
+    sortOn = 'description';
+
     repos: repos[];
 
     loading = false;
@@ -26,7 +29,7 @@ export class AppComponent
     public getRepos() {
         this.loading = true;
         this.errorMessage = '';
-        this.githubService.getRepos(this.userName)
+        this.githubService.getRepos(this.userName,this.pageNo,this.sortOn)
             .subscribe((response) => {this.repos = response;},
                        (error) => {
                            this.errorMessage = error.message; this.loading = false; 

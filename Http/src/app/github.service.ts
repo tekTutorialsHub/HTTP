@@ -5,8 +5,8 @@ import { Observable} from 'rxjs/Rx';
 
 import { repos} from './repos';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+/*import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';*/
 
 
 @Injectable()
@@ -14,11 +14,11 @@ export class GitHubService {
 
    baseURL:string="https://api.github.com/";
 
-   constructor(private http:HttpClient){
+   constructor(private httpClient:HttpClient){
    }
 
    getRepos(userName:string): Observable<repos[]> {
-        return this.http.get<repos[]>(this.baseURL + 'users/' + userName + '/repos')
+        return this.httpClient.get<repos[]>(this.baseURL + 'users/' + userName + '/repos')
    }
 
    /*getRepos(userName:string): Observable<repos[]> {
