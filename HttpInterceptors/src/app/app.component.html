@@ -1,0 +1,57 @@
+<div class="container">
+
+    <h1 class="heading"><strong>HTTP </strong>Demo</h1>
+    
+
+    <div class="form-group">
+       <label for="userName">User Name</label>
+       <input type="text" class="form-control" name="userName" [(ngModel)]="userName">
+
+       <label for="pageNo">Page No</label>
+       <input type="text" class="form-control" name="pageNo" [(ngModel)]="pageNo">
+
+       <label for="sortOn">Sorted On</label>
+       <input type="text" class="form-control" name="sortOn" [(ngModel)]="sortOn">
+    </div>
+
+    <div class="form-group">
+        <button type="button" (click)="getRepos()">Get Repos</button>
+    </div>
+
+    <div *ngIf="loading">loading...</div>
+    
+    <div *ngIf="errorMessage" class="alert alert-warning">
+       <strong>Warning!</strong> {{errorMessage}}
+    </div>
+
+    <div class='table-responsive'>
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>HTML Url</th>
+                        <th>description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let repo of repos;">
+                        <td>{{repo.id}}</td>
+                        <td>{{repo.name}}</td>
+                        <td>{{repo.html_url}}</td>
+                        <td>{{repo.description}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+
+    
+    <pre>{{repos | json}}</pre>
+
+</div>
+
+
+
+
+
